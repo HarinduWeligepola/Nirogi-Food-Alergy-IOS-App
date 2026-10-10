@@ -40,32 +40,43 @@ struct RootView: View {
 
 // MARK: - Main tabs
 
+/// The app's four tabs.
+///
+/// Declared as a type rather than relying on implicit ordering so that one
+/// screen can send the user to another — the home screen's main call to
+/// action opens the Scan tab.
+enum AppTab: Hashable {
+    case home, scan, places, profile
+}
+
 /// The app's primary navigation: four tabs, each with its own stack.
 struct MainTabView: View {
 
     let profile: UserProfile
 
+    @State private var selection: AppTab = .home
+
     var body: some View {
-        TabView {
-            Tab("Home", systemImage: "house.fill") {
+        TabView(selection: $selection) {
+            Tab("Home", systemImage: "house.fill", value: AppTab.home) {
                 NavigationStack {
-                    HomeView(profile: profile)
+                    HomeView(profile: profile, selectedTab: $selection)
                 }
             }
 
-            Tab("Scan", systemImage: "viewfinder") {
+            Tab("Scan", systemImage: "viewfinder", value: AppTab.scan) {
                 NavigationStack {
                     ScanView(profile: profile)
                 }
             }
 
-            Tab("Places", systemImage: "map.fill") {
+            Tab("Places", systemImage: "map.fill", value: AppTab.places) {
                 NavigationStack {
                     ScanMapView()
                 }
             }
 
-            Tab("Profile", systemImage: "person.crop.circle.fill") {
+            Tab("Profile", systemImage: "person.crop.circle.fill", value: AppTab.profile) {
                 NavigationStack {
                     ProfileView(profile: profile)
                 }
