@@ -111,12 +111,45 @@ enum LabelParser {
             index += 1
         }
 
-        let nutrition = parseNutrition(from: normalised)
+        // Nutrition parsing needs the original line breaks: whether a value
+        // sits on the same line as its name is exactly what distinguishes an
+        // inline table from a column-major one.
+        let nutrition = parseNutrition(from: normaliseKeepingLines(rawText))
 
         return ParsedLabel(rawText: rawText, ingredients: ingredients, nutrition: nutrition)
     }
 
     // MARK: - Normalisation
+
+    /// Cleans up OCR noise while keeping line breaks intact.
+    ///
+    /// Used for nutrition parsing, where line structure carries meaning.
+    static func normaliseKeepingLines(_ text: String) -> String {
+        var result = text.lowercased()
+
+        for (from, to) in punctuationReplacements {
+            result = result.replacingOccurrences(of: from, with: to)
+        }
+
+        // A hyphen at the end of a line is a word broken across lines.
+        result = result.replacingOccurrences(of: "-\n", with: "")
+
+        // Collapse runs of spaces and tabs, but never newlines.
+        result = result.replacingOccurrences(
+            of: #"[ \t]+"#, with: " ", options: .regularExpression)
+
+        return result.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    /// Punctuation variants OCR produces inconsistently, and what to
+    /// normalise each one to.
+    private static let punctuationReplacements: [String: String] = [
+        "\u{2018}": "'", "\u{2019}": "'",      // curly single quotes
+        "\u{201C}": "\"", "\u{201D}": "\"",    // curly double quotes
+        "\u{2013}": "-", "\u{2014}": "-",      // en and em dashes
+        "\u{00A0}": " ",                        // non-breaking space
+        "：": ":", "，": ",", "；": ";"          // full-width punctuation
+    ]
 
     /// Lowercases the text and repairs the kinds of noise OCR introduces:
     /// smart quotes, stray line breaks inside words, and inconsistent
@@ -299,88 +332,176 @@ enum LabelParser {
 
     /// Reads nutrient values out of a nutrition table.
     ///
-    /// Tables vary wildly between manufacturers, so rather than assuming a
-    /// fixed layout the parser looks for each nutrient keyword and takes the
-    /// first number that follows it on the same line.
+    /// Two layouts have to be handled, because Vision reports what it sees
+    /// rather than what the table means:
+    ///
+    /// 1. **Inline** — "Sugar 22.5 g" on one line. The common case.
+    /// 2. **Column-major** — Vision returns every nutrient *name* first and
+    ///    every *value* afterwards, because the wide gap between the two
+    ///    printed columns reads as separate blocks. A naive parser then
+    ///    pairs "Sugar" with the energy figure, silently reporting a wrong
+    ///    number — which is worse than reporting none at all.
+    ///
+    /// Line structure is therefore preserved for nutrition parsing, unlike
+    /// ingredient parsing where line breaks are just separators.
     static func parseNutrition(from text: String) -> [NutrientValue] {
-        // Narrow to the nutrition table when the label has one, so numbers
-        // inside the ingredient list can never be misread as nutrients.
-        let searchText = nutritionSection(of: text) ?? text
-        let isScoped = nutritionSection(of: text) != nil
+        let lines = nutritionLines(of: text)
+        guard !lines.isEmpty else { return [] }
 
-        var values: [NutrientValue] = []
-        for nutrient in Nutrient.allCases {
-            guard let value = firstValue(for: nutrient, in: searchText, allowUnitlessFallback: isScoped) else { continue }
-            values.append(value)
-        }
-        return values
-    }
+        var values = inlineValues(in: lines)
 
-    /// Returns the portion of the label from the nutrition header onwards,
-    /// or `nil` when no nutrition table was found.
-    static func nutritionSection(of text: String) -> String? {
-        guard let headerRange = earliestRange(of: nutritionHeaders, in: text) else { return nil }
-        return String(text[headerRange.upperBound...])
-    }
-
-    /// Finds the first plausible value for one nutrient.
-    ///
-    /// - Parameter allowUnitlessFallback: when true, a bare number with no
-    ///   unit is accepted as a last resort. Only safe inside a confirmed
-    ///   nutrition table, where stray numbers are unlikely.
-    private static func firstValue(for nutrient: Nutrient,
-                                   in text: String,
-                                   allowUnitlessFallback: Bool) -> NutrientValue? {
-        // Longest keywords first, so "of which sugars" beats "sugar".
-        let keywords = nutrient.tableKeywords.sorted { $0.count > $1.count }
-
-        // First pass: only accept a number carrying a unit this nutrient
-        // actually uses. This is what rejects the "322" in "E322".
-        if let value = scan(keywords: keywords, in: text, nutrient: nutrient, requireUnit: true) {
-            return value
+        // Fill anything still missing using positional column pairing.
+        for candidate in columnPairedValues(in: lines)
+        where !values.contains(where: { $0.nutrient == candidate.nutrient }) {
+            values.append(candidate)
         }
 
-        // Second pass: accept a unitless number, but only inside a real
-        // nutrition table.
-        guard allowUnitlessFallback else { return nil }
-        return scan(keywords: keywords, in: text, nutrient: nutrient, requireUnit: false)
+        // Return in a stable, declared order rather than discovery order.
+        return Nutrient.allCases.compactMap { nutrient in
+            values.first { $0.nutrient == nutrient }
+        }
     }
 
-    /// Walks every occurrence of every keyword, returning the first that
-    /// yields an acceptable number.
+    /// The lines belonging to the nutrition table, lowercased and trimmed.
     ///
-    /// Checking *all* occurrences rather than just the first matters: the
-    /// word "sugar" usually appears in the ingredient list before it appears
-    /// in the nutrition table.
-    private static func scan(keywords: [String],
-                             in text: String,
-                             nutrient: Nutrient,
-                             requireUnit: Bool) -> NutrientValue? {
-        for keyword in keywords {
-            var searchStart = text.startIndex
+    /// When no nutrition heading is present every line is returned, since
+    /// some small packets print values with no heading at all.
+    static func nutritionLines(of text: String) -> [String] {
+        let all = text
+            .components(separatedBy: .newlines)
+            .map { $0.trimmingCharacters(in: .whitespaces).lowercased() }
+            .filter { !$0.isEmpty }
 
-            while searchStart < text.endIndex,
-                  let keywordRange = text.range(of: keyword, range: searchStart..<text.endIndex) {
-                searchStart = keywordRange.upperBound
+        guard let headerIndex = all.firstIndex(where: { line in
+            nutritionHeaders.contains { line.contains($0) }
+        }) else {
+            return all
+        }
+        return Array(all[headerIndex...])
+    }
 
-                // Look at a window after the keyword: enough for a number and
-                // a unit, but short enough not to run into the next row.
-                let afterKeyword = text[keywordRange.upperBound...]
-                let window = String(afterKeyword.prefix(40))
+    /// Values where the nutrient name and its number share a line.
+    ///
+    /// Every nutrient is looked for on every line, because compact labels
+    /// print the whole table on one line: "Energy 480 kcal, Sugar 22.5 g,
+    /// Salt 1.2 g".
+    private static func inlineValues(in lines: [String]) -> [NutrientValue] {
+        var results: [NutrientValue] = []
+
+        for line in lines {
+            for nutrient in Nutrient.allCases
+            where !results.contains(where: { $0.nutrient == nutrient }) {
+
+                guard let (keyword, afterKeyword) = keywordMatch(for: nutrient, in: line) else { continue }
+
+                // Stop at the next nutrient's name, so "sugar salt 620 kcal"
+                // cannot pair "sugar" with the energy figure.
+                let window = truncateAtNextNutrient(afterKeyword, excluding: nutrient)
 
                 guard let (amount, unit, source) = firstNumber(in: window) else { continue }
+                guard acceptedUnits(for: nutrient).contains(unit) else { continue }
 
-                if requireUnit {
-                    guard acceptedUnits(for: nutrient).contains(unit) else { continue }
-                }
-
-                let normalised = normaliseAmount(amount, unit: unit, for: nutrient)
-                return NutrientValue(nutrient: nutrient,
-                                     amountPer100g: normalised,
-                                     sourceText: "\(keyword) \(source)".trimmed)
+                results.append(NutrientValue(
+                    nutrient: nutrient,
+                    amountPer100g: normaliseAmount(amount, unit: unit, for: nutrient),
+                    sourceText: "\(keyword) \(source)".trimmed))
             }
         }
+
+        return results
+    }
+
+    /// Finds one nutrient's longest matching keyword in a line, returning
+    /// the keyword and the text that follows it.
+    private static func keywordMatch(for nutrient: Nutrient, in line: String) -> (String, String)? {
+        let keywords = nutrient.tableKeywords.sorted { $0.count > $1.count }
+        for keyword in keywords {
+            guard let range = line.range(of: keyword) else { continue }
+            return (keyword, String(line[range.upperBound...]))
+        }
         return nil
+    }
+
+    /// Pairs a run of name-only lines with the run of value-only lines that
+    /// follows it, which is how a two-column table arrives from Vision.
+    private static func columnPairedValues(in lines: [String]) -> [NutrientValue] {
+        var names: [(nutrient: Nutrient, keyword: String, index: Int)] = []
+        var figures: [(amount: Double, unit: String, source: String, index: Int)] = []
+
+        for (index, line) in lines.enumerated() {
+            if let (nutrient, keyword, _) = matchNutrient(in: line),
+               !line.contains(where: \.isNumber) {
+                names.append((nutrient, keyword, index))
+                continue
+            }
+            if let figure = standaloneValue(in: line) {
+                figures.append((figure.amount, figure.unit, line, index))
+            }
+        }
+
+        // Only trust this when it really is one block of names followed by
+        // one block of values.
+        guard let lastName = names.last?.index,
+              let firstFigure = figures.first?.index,
+              names.count > 1, lastName < firstFigure else { return [] }
+
+        var results: [NutrientValue] = []
+        for (position, name) in names.enumerated() {
+            guard position < figures.count else { break }
+            let figure = figures[position]
+
+            // A mismatched unit means the columns are not aligned after all,
+            // so nothing is reported rather than guessing.
+            guard acceptedUnits(for: name.nutrient).contains(figure.unit) else { continue }
+
+            results.append(NutrientValue(
+                nutrient: name.nutrient,
+                amountPer100g: normaliseAmount(figure.amount, unit: figure.unit, for: name.nutrient),
+                sourceText: "\(name.keyword) \(figure.source)".trimmed))
+        }
+        return results
+    }
+
+    /// Finds which nutrient a line names, preferring the longest keyword so
+    /// "of which saturates" wins over "saturates".
+    private static func matchNutrient(in line: String) -> (Nutrient, String, String)? {
+        var best: (Nutrient, String, String)?
+
+        for nutrient in Nutrient.allCases {
+            for keyword in nutrient.tableKeywords {
+                guard let range = line.range(of: keyword) else { continue }
+                if let existing = best, existing.1.count >= keyword.count { continue }
+                best = (nutrient, keyword, String(line[range.upperBound...]))
+            }
+        }
+        return best
+    }
+
+    /// Cuts a snippet at the first mention of a different nutrient.
+    private static func truncateAtNextNutrient(_ text: String, excluding nutrient: Nutrient) -> String {
+        var cutoff = text.endIndex
+
+        for other in Nutrient.allCases where other != nutrient {
+            for keyword in other.tableKeywords {
+                guard let range = text.range(of: keyword) else { continue }
+                if range.lowerBound < cutoff { cutoff = range.lowerBound }
+            }
+        }
+        return String(text[..<cutoff])
+    }
+
+    /// Reads a line that is nothing but a number and a unit, e.g. "620 kcal".
+    private static func standaloneValue(in line: String) -> (amount: Double, unit: String)? {
+        let pattern = #"^(\d+(?:[.,]\d+)?)\s*(kcal|kj|mg|g)$"#
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
+        let range = NSRange(line.startIndex..., in: line)
+        guard let match = regex.firstMatch(in: line, range: range),
+              let numberRange = Range(match.range(at: 1), in: line),
+              let unitRange = Range(match.range(at: 2), in: line) else { return nil }
+
+        let numberText = line[numberRange].replacingOccurrences(of: ",", with: ".")
+        guard let amount = Double(numberText) else { return nil }
+        return (amount, String(line[unitRange]))
     }
 
     /// Units that are valid for a given nutrient on a label.
@@ -391,6 +512,7 @@ enum LabelParser {
         case .energy: return ["kcal", "kj"]
         }
     }
+
 
     /// Extracts the first number and its unit from a snippet of text.
     private static func firstNumber(in text: String) -> (amount: Double, unit: String, source: String)? {
