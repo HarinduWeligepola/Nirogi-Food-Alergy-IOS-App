@@ -158,7 +158,8 @@ struct OnboardingView: View {
 
     // MARK: - Pieces
 
-    private func onboardingPoint(symbol: String, title: String, detail: String) -> some View {
+    private func onboardingPoint(symbol: String, title: LocalizedStringKey,
+                                 detail: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: Theme.Spacing.sm) {
             Image(systemName: symbol)
                 .font(.title3)
@@ -178,7 +179,7 @@ struct OnboardingView: View {
         .accessibilityElement(children: .combine)
     }
 
-    private func disclaimerPoint(_ text: String) -> some View {
+    private func disclaimerPoint(_ text: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: Theme.Spacing.xs) {
             Image(systemName: "circle.fill")
                 .font(.system(size: 5))

@@ -42,9 +42,9 @@ enum Severity: String, Codable, CaseIterable, Comparable, Sendable {
     /// Human-readable label shown in the UI.
     var title: String {
         switch self {
-        case .mild: return "Mild"
-        case .moderate: return "Moderate"
-        case .severe: return "Severe"
+        case .mild: return String(localized: "Mild")
+        case .moderate: return String(localized: "Moderate")
+        case .severe: return String(localized: "Severe")
         }
     }
 
@@ -89,9 +89,9 @@ enum DietaryPreference: String, Codable, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .vegetarian: return "Vegetarian"
-        case .vegan: return "Vegan"
-        case .halal: return "Halal"
+        case .vegetarian: return String(localized: "Vegetarian")
+        case .vegan: return String(localized: "Vegan")
+        case .halal: return String(localized: "Halal")
         }
     }
 

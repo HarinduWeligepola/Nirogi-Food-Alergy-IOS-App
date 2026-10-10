@@ -25,9 +25,9 @@ extension Verdict {
     /// Plain-language summary shown under the verdict word.
     var explanation: String {
         switch self {
-        case .safe: return "Nothing on this label conflicts with your profile."
-        case .caution: return "There is something here you should know about."
-        case .avoid: return "This product conflicts with your profile."
+        case .safe: return String(localized: "Nothing on this label conflicts with your profile.")
+        case .caution: return String(localized: "There is something here you should know about.")
+        case .avoid: return String(localized: "This product conflicts with your profile.")
         }
     }
 }
@@ -163,8 +163,8 @@ struct FindingRow: View {
 /// Shown when a list has nothing in it yet.
 struct EmptyState: View {
     let symbolName: String
-    let title: String
-    let message: String
+    let title: LocalizedStringKey
+    let message: LocalizedStringKey
 
     var body: some View {
         VStack(spacing: Theme.Spacing.sm) {

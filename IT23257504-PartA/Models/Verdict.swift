@@ -27,11 +27,16 @@ enum Verdict: String, Codable, CaseIterable, Sendable {
     case avoid
 
     /// The word shown on the verdict card.
+    ///
+    /// Routed through `String(localized:)` rather than returned as a plain
+    /// literal, because SwiftUI only auto-localises literals written
+    /// directly inside a `Text`. Model-supplied strings must ask for the
+    /// translation themselves.
     var title: String {
         switch self {
-        case .safe: return "Safe"
-        case .caution: return "Caution"
-        case .avoid: return "Avoid"
+        case .safe: return String(localized: "Safe")
+        case .caution: return String(localized: "Caution")
+        case .avoid: return String(localized: "Avoid")
         }
     }
 
@@ -133,10 +138,10 @@ struct Finding: Codable, Hashable, Identifiable, Sendable {
 
         var title: String {
             switch self {
-            case .contains: return "Contains"
-            case .mayContain: return "May contain"
-            case .overLimit: return "Over your limit"
-            case .dietaryConflict: return "Diet conflict"
+            case .contains: return String(localized: "Contains")
+            case .mayContain: return String(localized: "May contain")
+            case .overLimit: return String(localized: "Over your limit")
+            case .dietaryConflict: return String(localized: "Diet conflict")
             }
         }
 

@@ -114,7 +114,8 @@ struct HomeView: View {
         }
     }
 
-    private var greeting: String {
+    /// Returns a `LocalizedStringKey` so both branches are translated.
+    private var greeting: LocalizedStringKey {
         let name = profile.displayName.trimmingCharacters(in: .whitespaces)
         return name.isEmpty ? "Your profile" : "Hello, \(name)"
     }

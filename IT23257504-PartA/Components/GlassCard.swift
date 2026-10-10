@@ -79,7 +79,12 @@ extension View {
 struct GlassCard<Content: View>: View {
 
     /// Optional heading shown above the content.
-    var title: String?
+    ///
+    /// Typed as `LocalizedStringKey` rather than `String` so that literals
+    /// written at the call site are picked up by the string catalogue.
+    /// SwiftUI only auto-localises literals passed straight into `Text`;
+    /// a `String` variable is rendered verbatim.
+    var title: LocalizedStringKey?
     /// Optional SF Symbol shown beside the heading.
     var symbolName: String?
     /// Optional tint pulled through the glass.
@@ -118,7 +123,7 @@ struct GlassCard<Content: View>: View {
 
 /// A small heading used between cards on a screen.
 struct SectionHeading: View {
-    let text: String
+    let text: LocalizedStringKey
     var symbolName: String?
 
     var body: some View {

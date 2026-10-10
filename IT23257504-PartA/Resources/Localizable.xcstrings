@@ -1,0 +1,1570 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Home": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "මුල් පිටුව"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முகப்பு"
+          }
+        }
+      }
+    },
+    "Scan": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ස්කෑන්"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஸ்கேன்"
+          }
+        }
+      }
+    },
+    "Places": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ස්ථාන"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இடங்கள்"
+          }
+        }
+      }
+    },
+    "Profile": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "පැතිකඩ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சுயவிவரம்"
+          }
+        }
+      }
+    },
+    "Scan a Label": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ලේබලය ස්කෑන් කරන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "லேபிளை ஸ்கேன் செய்யவும்"
+          }
+        }
+      }
+    },
+    "Result": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ප්‍රතිඵලය"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முடிவு"
+          }
+        }
+      }
+    },
+    "About": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "පිළිබඳව"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பற்றி"
+          }
+        }
+      }
+    },
+    "Sample Labels": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නියැදි ලේබල"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மாதிரி லேபிள்கள்"
+          }
+        }
+      }
+    },
+    "Safe": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ආරක්ෂිතයි"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பாதுகாப்பானது"
+          }
+        }
+      }
+    },
+    "Caution": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ප්‍රවේශම් වන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "எச்சரிக்கை"
+          }
+        }
+      }
+    },
+    "Avoid": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "වළකින්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தவிர்க்கவும்"
+          }
+        }
+      }
+    },
+    "Nothing on this label conflicts with your profile.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "මෙම ලේබලයේ ඔබේ පැතිකඩට පටහැනි කිසිවක් නැත."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இந்த லேபிளில் உங்கள் சுயவிவரத்துடன் முரண்படுவது எதுவும் இல்லை."
+          }
+        }
+      }
+    },
+    "There is something here you should know about.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඔබ දැනගත යුතු දෙයක් මෙහි ඇත."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீங்கள் அறிந்திருக்க வேண்டிய ஒன்று இங்கே உள்ளது."
+          }
+        }
+      }
+    },
+    "This product conflicts with your profile.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "මෙම නිෂ්පාදනය ඔබේ පැතිකඩට පටහැනියි."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இந்தப் பொருள் உங்கள் சுயவிவரத்துடன் முரண்படுகிறது."
+          }
+        }
+      }
+    },
+    "Contains": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "අඩංගු වේ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கொண்டுள்ளது"
+          }
+        }
+      }
+    },
+    "May contain": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "අඩංගු විය හැක"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இருக்கக்கூடும்"
+          }
+        }
+      }
+    },
+    "Over your limit": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඔබේ සීමාව ඉක්මවා"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் வரம்பை மீறி"
+          }
+        }
+      }
+    },
+    "Diet conflict": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ආහාර රටාවට පටහැනියි"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உணவுமுறை முரண்பாடு"
+          }
+        }
+      }
+    },
+    "Why": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඇයි"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஏன்"
+          }
+        }
+      }
+    },
+    "Mild": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "මෘදු"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "லேசான"
+          }
+        }
+      }
+    },
+    "Moderate": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "මධ්‍යස්ථ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மிதமான"
+          }
+        }
+      }
+    },
+    "Severe": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "දරුණු"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடுமையான"
+          }
+        }
+      }
+    },
+    "Vegetarian": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නිර්මාංශ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சைவம்"
+          }
+        }
+      }
+    },
+    "Vegan": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "වීගන්"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முழு சைவம்"
+          }
+        }
+      }
+    },
+    "Halal": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "හලාල්"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஹலால்"
+          }
+        }
+      }
+    },
+    "Diet": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ආහාර රටාව"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உணவுமுறை"
+          }
+        }
+      }
+    },
+    "Allergens": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "අසාත්මිකතා"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒவ்வாமைகள்"
+          }
+        }
+      }
+    },
+    "Sugar": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "සීනි"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சர்க்கரை"
+          }
+        }
+      }
+    },
+    "Salt / Sodium": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ලුණු / සෝඩියම්"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உப்பு / சோடியம்"
+          }
+        }
+      }
+    },
+    "Saturated Fat": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "සංතෘප්ත මේදය"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நிறைவுற்ற கொழுப்பு"
+          }
+        }
+      }
+    },
+    "Energy": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ශක්තිය"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஆற்றல்"
+          }
+        }
+      }
+    },
+    "Nutrition limits": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "පෝෂණ සීමා"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஊட்டச்சத்து வரம்புகள்"
+          }
+        }
+      }
+    },
+    "Nutrition per 100g": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100g කට පෝෂණය"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100g க்கு ஊட்டச்சத்து"
+          }
+        }
+      }
+    },
+    "Continue": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඉදිරියට"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தொடரவும்"
+          }
+        }
+      }
+    },
+    "I understand — Start": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "මට තේරුණා — ආරම්භ කරන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புரிகிறது — தொடங்கு"
+          }
+        }
+      }
+    },
+    "Take Photo": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඡායාරූපයක් ගන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புகைப்படம் எடுக்கவும்"
+          }
+        }
+      }
+    },
+    "Choose Photo": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඡායාරූපයක් තෝරන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புகைப்படத்தைத் தேர்ந்தெடுக்கவும்"
+          }
+        }
+      }
+    },
+    "Try a Sample": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නියැදියක් බලන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மாதிரியை முயற்சிக்கவும்"
+          }
+        }
+      }
+    },
+    "Save scan": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ස්කෑන් සුරකින්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஸ்கேனைச் சேமிக்கவும்"
+          }
+        }
+      }
+    },
+    "Saved": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "සුරකින ලදී"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சேமிக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Save to history": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඉතිහාසයට සුරකින්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "வரலாற்றில் சேமிக்கவும்"
+          }
+        }
+      }
+    },
+    "Product name": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නිෂ්පාදනයේ නම"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பொருளின் பெயர்"
+          }
+        }
+      }
+    },
+    "Close": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "වසන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மூடு"
+          }
+        }
+      }
+    },
+    "Done": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "අවසන්"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முடிந்தது"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "අවලංගු කරන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ரத்து செய்"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "මකන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீக்கு"
+          }
+        }
+      }
+    },
+    "Try again": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නැවත උත්සාහ කරන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மீண்டும் முயற்சிக்கவும்"
+          }
+        }
+      }
+    },
+    "New scan": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නව ස්කෑන්"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய ஸ்கேன்"
+          }
+        }
+      }
+    },
+    "Your profile": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඔබේ පැතිකඩ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் சுயவிவரம்"
+          }
+        }
+      }
+    },
+    "Recent scans": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "මෑත ස්කෑන්"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சமீபத்திய ஸ்கேன்கள்"
+          }
+        }
+      }
+    },
+    "No scans yet": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "තවම ස්කෑන් නැත"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இன்னும் ஸ்கேன்கள் இல்லை"
+          }
+        }
+      }
+    },
+    "Labels are checked against:": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ලේබල පරීක්ෂා කරන්නේ:"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "லேபிள்கள் இவற்றுடன் சரிபார்க்கப்படும்:"
+          }
+        }
+      }
+    },
+    "Search saved scans": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "සුරකින ලද ස්කෑන් සොයන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சேமித்த ஸ்கேன்களைத் தேடு"
+          }
+        }
+      }
+    },
+    "Search allergens": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "අසාත්මිකතා සොයන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒவ்வாமைகளைத் தேடு"
+          }
+        }
+      }
+    },
+    "Open the Scan tab and photograph an ingredient label to get started.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ආරම්භ කිරීමට ස්කෑන් ටැබය විවෘත කර අමුද්‍රව්‍ය ලේබලයක් ඡායාරූප ගන්න."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தொடங்க ஸ்கேன் தாவலைத் திறந்து ஒரு பொருட்கள் லேபிளைப் புகைப்படம் எடுக்கவும்."
+          }
+        }
+      }
+    },
+    "Know before you eat": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "කන්න කලින් දැනගන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சாப்பிடும் முன் அறிந்து கொள்ளுங்கள்"
+          }
+        }
+      }
+    },
+    "What should we watch for?": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "අපි මොනවාද බලන්න ඕන?"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நாங்கள் எதைக் கவனிக்க வேண்டும்?"
+          }
+        }
+      }
+    },
+    "Common in Sri Lanka": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ශ්‍රී ලංකාවේ බහුලයි"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இலங்கையில் பொதுவானவை"
+          }
+        }
+      }
+    },
+    "Others": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "වෙනත්"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மற்றவை"
+          }
+        }
+      }
+    },
+    "Please read this": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "කරුණාකර මෙය කියවන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இதைப் படிக்கவும்"
+          }
+        }
+      }
+    },
+    "Photograph the label": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ලේබලය ඡායාරූප ගන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "லேபிளைப் புகைப்படம் எடுக்கவும்"
+          }
+        }
+      }
+    },
+    "Checked against you": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඔබට අනුව පරීක්ෂා කෙරේ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்களுக்கேற்ப சரிபார்க்கப்படும்"
+          }
+        }
+      }
+    },
+    "Private by design": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "සැලසුමෙන්ම පෞද්ගලිකයි"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "வடிவமைப்பிலேயே தனிப்பட்டது"
+          }
+        }
+      }
+    },
+    "Nirogi helps you read labels. It is not medical advice.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නිරෝගී ලේබල කියවීමට උදව් කරයි. එය වෛද්‍ය උපදෙස් නොවේ."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நிரோகி லேபிள்களைப் படிக்க உதவுகிறது. இது மருத்துவ ஆலோசனை அல்ல."
+          }
+        }
+      }
+    },
+    "Point at the ingredients": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "අමුද්‍රව්‍ය වෙත එල්ල කරන්න"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பொருட்களை நோக்கிக் காட்டவும்"
+          }
+        }
+      }
+    },
+    "For the best reading": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "හොඳම කියවීම සඳහා"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சிறந்த வாசிப்புக்கு"
+          }
+        }
+      }
+    },
+    "Reading the label…": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ලේබලය කියවමින්…"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "லேபிளைப் படிக்கிறது…"
+          }
+        }
+      }
+    },
+    "Checking against your profile…": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඔබේ පැතිකඩට එරෙහිව පරීක්ෂා කරමින්…"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் சுயவிவரத்துடன் சரிபார்க்கிறது…"
+          }
+        }
+      }
+    },
+    "Could not read that": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "එය කියවිය නොහැකි විය"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அதைப் படிக்க முடியவில்லை"
+          }
+        }
+      }
+    },
+    "Ingredients read": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "කියවූ අමුද්‍රව්‍ය"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படிக்கப்பட்ட பொருட்கள்"
+          }
+        }
+      }
+    },
+    "What the scan saw": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ස්කෑන් දුටු දේ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஸ்கேன் கண்டது"
+          }
+        }
+      }
+    },
+    "Nothing flagged": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "කිසිවක් සලකුණු කර නැත"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "எதுவும் குறிக்கப்படவில்லை"
+          }
+        }
+      }
+    },
+    "Low scan quality": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ස්කෑන් ගුණාත්මකභාවය අඩුයි"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஸ்கேன் தரம் குறைவு"
+          }
+        }
+      }
+    },
+    "Profile changed": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "පැතිකඩ වෙනස් විය"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சுயவிவரம் மாறியது"
+          }
+        }
+      }
+    },
+    "How it works": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ක්‍රියා කරන ආකාරය"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இது எப்படி வேலை செய்கிறது"
+          }
+        }
+      }
+    },
+    "Privacy": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "පෞද්ගලිකත්වය"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தனியுரிமை"
+          }
+        }
+      }
+    },
+    "Important": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "වැදගත්"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முக்கியம்"
+          }
+        }
+      }
+    },
+    "Your name": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඔබේ නම"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் பெயர்"
+          }
+        }
+      }
+    },
+    "Optional": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "විකල්ප"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "விருப்பத்தேர்வு"
+          }
+        }
+      }
+    },
+    "No places saved yet": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "තවම ස්ථාන සුරකින ලද නැත"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இன்னும் இடங்கள் சேமிக்கப்படவில்லை"
+          }
+        }
+      }
+    },
+    "Nirogi reads the ingredient list on your device and checks every word against your profile.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නිරෝගී ඔබේ උපාංගයේදීම අමුද්‍රව්‍ය ලැයිස්තුව කියවා සෑම වචනයක්ම ඔබේ පැතිකඩට එරෙහිව පරීක්ෂා කරයි."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நிரோகி உங்கள் சாதனத்திலேயே பொருட்கள் பட்டியலைப் படித்து ஒவ்வொரு வார்த்தையையும் உங்கள் சுயவிவரத்துடன் சரிபார்க்கிறது."
+          }
+        }
+      }
+    },
+    "Fill the frame with the ingredients panel.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "රාමුව තුළ අමුද්‍රව්‍ය පැනලය සම්පූර්ණයෙන් ගන්න."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சட்டகத்தை பொருட்கள் பலகையால் நிரப்பவும்."
+          }
+        }
+      }
+    },
+    "Flatten curved packets as much as you can.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "වක්‍ර පැකට් හැකි තරම් සමතලා කරන්න."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "வளைந்த பொதிகளை முடிந்தவரை தட்டையாக்கவும்."
+          }
+        }
+      }
+    },
+    "Avoid glare and harsh shadows.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "දීප්තිය සහ තද සෙවනැලි වළක්වා ගන්න."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒளிர்வு மற்றும் கடுமையான நிழல்களைத் தவிர்க்கவும்."
+          }
+        }
+      }
+    },
+    "Nirogi reads the English text on trilingual labels.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ත්‍රිභාෂා ලේබලවල ඉංග්‍රීසි පෙළ නිරෝගී කියවයි."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மும்மொழி லேபிள்களில் உள்ள ஆங்கில உரையை நிரோகி படிக்கிறது."
+          }
+        }
+      }
+    },
+    "Nirogi reads the ingredient list for you, right on your phone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නිරෝගී ඔබ වෙනුවෙන් ඔබේ දුරකථනයේදීම අමුද්‍රව්‍ය ලැයිස්තුව කියවයි."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நிரோகி உங்களுக்காக உங்கள் தொலைபேசியிலேயே பொருட்கள் பட்டியலைப் படிக்கிறது."
+          }
+        }
+      }
+    },
+    "It knows that casein means dairy and umbalakada means fish — even when the label does not say so.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "කැසීන් යනු කිරි බවත් උම්බලකඩ යනු මාළු බවත් එය දනී — ලේබලයේ එසේ සඳහන් නොවූවත්."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கேசீன் என்றால் பால் என்றும் உம்பலகடா என்றால் மீன் என்றும் இது அறியும் — லேபிளில் அவ்வாறு குறிப்பிடப்படாவிட்டாலும்."
+          }
+        }
+      }
+    },
+    "Nothing is uploaded. Your photos and your allergies never leave this device.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "කිසිවක් උඩුගත නොවේ. ඔබේ ඡායාරූප සහ අසාත්මිකතා කිසිවිටෙක මෙම උපාංගයෙන් පිටතට නොයයි."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "எதுவும் பதிவேற்றப்படுவதில்லை. உங்கள் புகைப்படங்களும் ஒவ்வாமைகளும் இந்தச் சாதனத்தை விட்டு வெளியேறாது."
+          }
+        }
+      }
+    },
+    "Pick anything you need to avoid. You can change these at any time, and set how serious each one is later.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ඔබට වළක්වා ගත යුතු ඕනෑම දෙයක් තෝරන්න. ඔබට ඕනෑම වේලාවක මේවා වෙනස් කළ හැකි අතර, පසුව එක් එක් දේ කොතරම් බරපතළද යන්න සැකසිය හැක."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீங்கள் தவிர்க்க வேண்டிய எதையும் தேர்ந்தெடுக்கவும். இவற்றை எப்போது வேண்டுமானாலும் மாற்றலாம், ஒவ்வொன்றும் எவ்வளவு தீவிரமானது என்பதைப் பின்னர் அமைக்கலாம்."
+          }
+        }
+      }
+    },
+    "Flag products that exceed these amounts per 100g.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100g කට මෙම ප්‍රමාණ ඉක්මවන නිෂ්පාදන සලකුණු කරන්න."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100g க்கு இந்த அளவுகளை மீறும் பொருட்களைக் குறிக்கவும்."
+          }
+        }
+      }
+    },
+    "These are real scans: each image is read by Vision exactly like a photo from the camera.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "මේවා සැබෑ ස්කෑන් වේ: සෑම රූපයක්ම කැමරාවෙන් ගත් ඡායාරූපයක් මෙන් Vision මගින් කියවනු ලැබේ."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இவை உண்மையான ஸ்கேன்கள்: ஒவ்வொரு படமும் கேமரா புகைப்படம் போலவே Vision ஆல் படிக்கப்படுகிறது."
+          }
+        }
+      }
+    },
+    "Nirogi assists with label reading and is not medical advice. Always check the packet yourself.": {
+      "extractionState": "manual",
+      "localizations": {
+        "si": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "නිරෝගී ලේබල කියවීමට සහාය වන අතර එය වෛද්‍ය උපදෙස් නොවේ. සැමවිටම පැකට්ටුව ඔබම පරීක්ෂා කරන්න."
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நிரோகி லேபிள் வாசிப்பில் உதவுகிறது, இது மருத்துவ ஆலோசனை அல்ல. எப்போதும் பொதியை நீங்களே சரிபார்க்கவும்."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
