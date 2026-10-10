@@ -256,6 +256,9 @@
 				DEVELOPMENT_TEAM = Z7G3TKSWC2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Nirogi uses the camera to photograph ingredient labels so it can read them for you. Photos stay on this device.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Nirogi can tag a scan with the shop you found it in, so you remember where to buy safe products. Your location is never uploaded.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Nirogi reads ingredient labels from photos you choose. Images are processed on this device only.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -288,6 +291,9 @@
 				DEVELOPMENT_TEAM = Z7G3TKSWC2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Nirogi uses the camera to photograph ingredient labels so it can read them for you. Photos stay on this device.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Nirogi can tag a scan with the shop you found it in, so you remember where to buy safe products. Your location is never uploaded.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Nirogi reads ingredient labels from photos you choose. Images are processed on this device only.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -156,6 +156,12 @@ enum LabelParser {
     ///
     /// If no "ingredients:" header is found the whole text is treated as the
     /// ingredient list, since many small local packets omit the header.
+    ///
+    /// The order of operations matters. The trace warning is located
+    /// *before* terminator headers are trimmed, because real packets print
+    /// the warning under its own "ALLERGEN ADVICE:" heading — and that
+    /// heading also ends the ingredient list. Trimming first would throw
+    /// the warning away, silently losing a "may contain peanuts" line.
     static func splitIngredientSection(from text: String) -> (list: String, trace: String) {
         var working = text
 
@@ -166,19 +172,23 @@ enum LabelParser {
             working = working.trimmingCharacters(in: CharacterSet(charactersIn: " :-."))
         }
 
-        // Cut off anything after a nutrition or storage header.
-        if let stopRange = earliestRange(of: terminators, in: working) {
-            working = String(working[..<stopRange.lowerBound])
-        }
-
-        // Separate the cross-contamination warning from the real list.
+        // Separate the cross-contamination warning from the real list, then
+        // trim each part at its own terminator.
         if let traceRange = earliestRange(of: traceMarkers, in: working) {
             let list = String(working[..<traceRange.lowerBound])
             let trace = String(working[traceRange.upperBound...])
-            return (list.trimmed, trace.trimmed)
+            return (cutAtTerminator(list), cutAtTerminator(trace))
         }
 
-        return (working.trimmed, "")
+        return (cutAtTerminator(working), "")
+    }
+
+    /// Removes everything from the first terminator header onwards.
+    private static func cutAtTerminator(_ text: String) -> String {
+        guard let stopRange = earliestRange(of: terminators, in: text) else {
+            return text.trimmed
+        }
+        return String(text[..<stopRange.lowerBound]).trimmed
     }
 
     /// Finds whichever of the given phrases appears earliest in the text.
