@@ -168,7 +168,7 @@ struct ProfileView: View {
         }
     }
 
-    private func allergenSection(title: String, allergens: [Allergen]) -> some View {
+    private func allergenSection(title: LocalizedStringKey, allergens: [Allergen]) -> some View {
         GlassCard(title: title, symbolName: nil) {
             VStack(spacing: Theme.Spacing.sm) {
                 ForEach(allergens) { allergen in
@@ -351,7 +351,7 @@ struct AboutView: View {
         }
     }
 
-    private func aboutLine(_ number: String, _ text: String) -> some View {
+    private func aboutLine(_ number: String, _ text: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: Theme.Spacing.xs) {
             Text(number)
                 .font(.caption.weight(.bold))

@@ -152,7 +152,7 @@ struct ScanView: View {
         }
     }
 
-    private func tip(_ text: String) -> some View {
+    private func tip(_ text: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: Theme.Spacing.xs) {
             Image(systemName: "checkmark.circle.fill")
                 .font(.caption)

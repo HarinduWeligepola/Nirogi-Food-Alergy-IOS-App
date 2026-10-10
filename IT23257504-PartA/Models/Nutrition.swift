@@ -25,10 +25,10 @@ enum Nutrient: String, Codable, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .sugar: return "Sugar"
-        case .salt: return "Salt / Sodium"
-        case .saturatedFat: return "Saturated Fat"
-        case .energy: return "Energy"
+        case .sugar: return String(localized: "Sugar")
+        case .salt: return String(localized: "Salt / Sodium")
+        case .saturatedFat: return String(localized: "Saturated Fat")
+        case .energy: return String(localized: "Energy")
         }
     }
 

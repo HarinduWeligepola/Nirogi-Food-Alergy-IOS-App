@@ -23,9 +23,9 @@ enum ImageSource: String, Identifiable, CaseIterable {
 
     var title: String {
         switch self {
-        case .camera: return "Take Photo"
-        case .photoLibrary: return "Choose Photo"
-        case .sample: return "Try a Sample"
+        case .camera: return String(localized: "Take Photo")
+        case .photoLibrary: return String(localized: "Choose Photo")
+        case .sample: return String(localized: "Try a Sample")
         }
     }
 
