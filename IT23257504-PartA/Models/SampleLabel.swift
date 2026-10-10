@@ -20,7 +20,7 @@ import Foundation
 import UIKit
 
 /// A bundled label image the user can scan without a camera.
-struct SampleLabel: Identifiable, Hashable, Sendable {
+nonisolated struct SampleLabel: Identifiable, Hashable, Sendable {
     let id: String
     /// Product name shown in the picker.
     let title: String

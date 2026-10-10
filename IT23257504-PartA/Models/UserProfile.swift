@@ -147,7 +147,7 @@ final class UserProfile {
 
 /// An immutable copy of everything the safety engine needs to know about
 /// the user. Contains no persistence or UI types.
-struct ProfileSnapshot: Hashable, Sendable {
+nonisolated struct ProfileSnapshot: Hashable, Sendable {
     var rules: [AllergenRule]
     var dietaryPreferences: [DietaryPreference]
     var healthLimits: [HealthLimit]

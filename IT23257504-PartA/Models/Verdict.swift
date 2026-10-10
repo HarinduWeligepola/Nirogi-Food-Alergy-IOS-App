@@ -17,7 +17,7 @@ import Foundation
 // MARK: - Verdict
 
 /// Overall safety outcome for one label and one user.
-enum Verdict: String, Codable, CaseIterable, Sendable {
+nonisolated enum Verdict: String, Codable, CaseIterable, Sendable {
     /// Nothing in the label conflicts with the user's profile.
     case safe
     /// Something worth knowing: a mild allergen, a "may contain" warning,
@@ -93,7 +93,7 @@ enum Verdict: String, Codable, CaseIterable, Sendable {
 
 /// How an ingredient came to be linked to an allergen. Surfaced in the UI so
 /// the user can judge how much to trust a match.
-enum MatchType: String, Codable, Sendable {
+nonisolated enum MatchType: String, Codable, Sendable {
     /// The allergen's own name appeared, e.g. "peanut".
     case exact
     /// A known alternative name appeared, e.g. "arachis oil" for peanut.
@@ -123,7 +123,7 @@ enum MatchType: String, Codable, Sendable {
 // MARK: - Finding
 
 /// One piece of evidence behind a verdict.
-struct Finding: Codable, Hashable, Identifiable, Sendable {
+nonisolated struct Finding: Codable, Hashable, Identifiable, Sendable {
 
     /// What kind of problem this finding represents.
     enum Kind: String, Codable, Sendable {
@@ -210,7 +210,7 @@ struct Finding: Codable, Hashable, Identifiable, Sendable {
 // MARK: - Analysis result
 
 /// Everything the safety engine produces for one label.
-struct AnalysisResult: Codable, Hashable, Sendable {
+nonisolated struct AnalysisResult: Codable, Hashable, Sendable {
     var verdict: Verdict
     var findings: [Finding]
     /// The cleaned, separated ingredient list the verdict was based on.

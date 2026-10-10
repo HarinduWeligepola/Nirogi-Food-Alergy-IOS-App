@@ -115,12 +115,13 @@ final class ModelTests: XCTestCase {
 
     // MARK: - Persistence
 
-    func testProfileIsCreatedOnceAndReused() async {
-        let profile = await ProfileStore.loadOrCreate(in: context)
+    @MainActor
+    func testProfileIsCreatedOnceAndReused() {
+        let profile = ProfileStore.loadOrCreate(in: context)
         profile.displayName = "Harindu"
         try? context.save()
 
-        let again = await ProfileStore.loadOrCreate(in: context)
+        let again = ProfileStore.loadOrCreate(in: context)
 
         XCTAssertEqual(again.id, profile.id, "A second call must return the same profile")
         XCTAssertEqual(again.displayName, "Harindu")

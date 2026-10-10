@@ -16,7 +16,7 @@
 import Foundation
 
 /// Analyses a parsed label against a user's profile.
-struct SafetyEngine: Sendable {
+nonisolated struct SafetyEngine: Sendable {
 
     /// The allergen definitions used for matching.
     let knowledgeBase: AllergenKnowledgeBase
@@ -337,7 +337,7 @@ struct SafetyEngine: Sendable {
 
 // MARK: - Text matching helpers
 
-extension SafetyEngine {
+nonisolated extension SafetyEngine {
 
     /// A word and where it sits in the text.
     struct Token: Hashable {
@@ -484,7 +484,7 @@ extension SafetyEngine {
 
 // MARK: - String helper
 
-extension String {
+nonisolated extension String {
     /// Capitalises only the first character, leaving the rest alone so that
     /// "whey powder" becomes "Whey powder" rather than "Whey Powder".
     var capitalisedFirst: String {

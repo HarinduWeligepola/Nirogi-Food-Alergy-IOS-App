@@ -17,7 +17,7 @@ import Foundation
 // MARK: - Parsed label
 
 /// One ingredient as it appeared on the label.
-struct Ingredient: Hashable, Sendable {
+nonisolated struct Ingredient: Hashable, Sendable {
     /// Cleaned text, e.g. "whey powder".
     let text: String
     /// Position in the label's ingredient list, used to highlight it later.
@@ -29,7 +29,7 @@ struct Ingredient: Hashable, Sendable {
 }
 
 /// Everything the parser could extract from a label.
-struct ParsedLabel: Hashable, Sendable {
+nonisolated struct ParsedLabel: Hashable, Sendable {
     let rawText: String
     let ingredients: [Ingredient]
     let nutrition: [NutrientValue]
@@ -48,7 +48,7 @@ struct ParsedLabel: Hashable, Sendable {
 // MARK: - Parser
 
 /// Converts raw OCR output into a `ParsedLabel`.
-enum LabelParser {
+nonisolated enum LabelParser {
 
     // MARK: Vocabulary
 
@@ -561,7 +561,7 @@ enum LabelParser {
 
 // MARK: - Helpers
 
-private extension String {
+nonisolated private extension String {
     /// Shorthand for trimming surrounding whitespace.
     var trimmed: String {
         trimmingCharacters(in: .whitespacesAndNewlines)

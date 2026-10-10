@@ -15,7 +15,7 @@ import Foundation
 
 /// A nutrient Nirogi can read from a nutrition table and check against a
 /// personal limit.
-enum Nutrient: String, Codable, CaseIterable, Identifiable, Sendable {
+nonisolated enum Nutrient: String, Codable, CaseIterable, Identifiable, Sendable {
     case sugar
     case salt
     case saturatedFat
@@ -81,7 +81,7 @@ enum Nutrient: String, Codable, CaseIterable, Identifiable, Sendable {
 // MARK: - Nutrient value
 
 /// One nutrient value as read from a label's nutrition table.
-struct NutrientValue: Codable, Hashable, Identifiable, Sendable {
+nonisolated struct NutrientValue: Codable, Hashable, Identifiable, Sendable {
     var id: UUID
     var nutrient: Nutrient
     /// Amount per 100g, normalised to the nutrient's `unit`.
@@ -113,7 +113,7 @@ struct NutrientValue: Codable, Hashable, Identifiable, Sendable {
 /// A ceiling the user sets for a nutrient. Exceeding it produces a Caution
 /// finding rather than an Avoid, since this is a preference rather than a
 /// medical danger.
-struct HealthLimit: Codable, Hashable, Identifiable, Sendable {
+nonisolated struct HealthLimit: Codable, Hashable, Identifiable, Sendable {
     var nutrient: Nutrient
     /// Maximum acceptable amount per 100g, in the nutrient's unit.
     var maxPer100g: Double

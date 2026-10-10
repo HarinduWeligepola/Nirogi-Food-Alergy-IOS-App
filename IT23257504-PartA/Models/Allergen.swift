@@ -20,7 +20,7 @@ import Foundation
 ///
 /// Severity drives the final verdict: a `severe` match always produces
 /// "Avoid", whereas a `mild` match only warrants "Caution".
-enum Severity: String, Codable, CaseIterable, Comparable, Sendable {
+nonisolated enum Severity: String, Codable, CaseIterable, Comparable, Sendable {
     case mild
     case moderate
     case severe
@@ -62,7 +62,7 @@ enum Severity: String, Codable, CaseIterable, Comparable, Sendable {
 
 /// One line of the user's personal profile: an allergen plus how severely
 /// they react to it. A profile is simply a collection of these.
-struct AllergenRule: Codable, Hashable, Identifiable, Sendable {
+nonisolated struct AllergenRule: Codable, Hashable, Identifiable, Sendable {
     /// Matches `Allergen.id` in the bundled knowledge base.
     var categoryID: String
     var severity: Severity
@@ -80,7 +80,7 @@ struct AllergenRule: Codable, Hashable, Identifiable, Sendable {
 /// Lifestyle or belief-based restrictions, which are handled separately from
 /// allergies because they are never medically dangerous — a conflict here is
 /// always "Caution" rather than "Avoid".
-enum DietaryPreference: String, Codable, CaseIterable, Identifiable, Sendable {
+nonisolated enum DietaryPreference: String, Codable, CaseIterable, Identifiable, Sendable {
     case vegetarian
     case vegan
     case halal
@@ -120,7 +120,7 @@ enum DietaryPreference: String, Codable, CaseIterable, Identifiable, Sendable {
 ///
 /// The `synonyms` array is the heart of the app: it is what lets Nirogi spot
 /// "casein" or "whey powder" when the user only told us they avoid dairy.
-struct Allergen: Codable, Identifiable, Hashable, Sendable {
+nonisolated struct Allergen: Codable, Identifiable, Hashable, Sendable {
     let id: String
     /// Display name, e.g. "Dairy".
     let name: String
