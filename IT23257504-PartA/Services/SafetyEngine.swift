@@ -126,9 +126,14 @@ struct SafetyEngine: Sendable {
 
         for term in allergen.allSearchTerms {
             for range in wordBoundaryRanges(of: term, in: text) {
-                // Skip a hit that falls inside an excluded phrase.
-                let isExcluded = exclusionRanges.contains { range.0 >= $0.0 && range.1 <= $0.1 }
-                guard !isExcluded else { continue }
+                // Skip a hit that overlaps an excluded phrase at all.
+                //
+                // Overlap rather than containment is deliberate. In "coconut
+                // milk powder" the dairy synonym "milk powder" runs past the
+                // end of the excluded phrase "coconut milk", so a
+                // containment check would let it through and report coconut
+                // milk powder as dairy.
+                guard !overlapsExclusion(range, exclusionRanges) else { continue }
 
                 found.append(Match(allergenID: allergen.id,
                                    matchedText: term,
@@ -162,8 +167,7 @@ struct SafetyEngine: Sendable {
         }
 
         for word in words where word.text.count >= Self.minimumFuzzyLength {
-            let isExcluded = exclusionRanges.contains { word.start >= $0.0 && word.end <= $0.1 }
-            guard !isExcluded else { continue }
+            guard !overlapsExclusion((word.start, word.end), exclusionRanges) else { continue }
 
             for term in singleWordTerms {
                 // Length can differ by at most one for a distance of one.
@@ -391,6 +395,15 @@ extension SafetyEngine {
             }
         }
         return results
+    }
+
+    /// True when a match shares any characters with an excluded phrase.
+    ///
+    /// Two ranges overlap when each starts before the other ends.
+    func overlapsExclusion(_ range: (Int, Int), _ exclusions: [(Int, Int)]) -> Bool {
+        exclusions.contains { exclusion in
+            range.0 < exclusion.1 && range.1 > exclusion.0
+        }
     }
 
     /// Character ranges covered by any of the given phrases.

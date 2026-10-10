@@ -259,6 +259,12 @@ struct AllergenRuleRow: View {
                 }
             }
             .tint(Theme.Palette.jade)
+            // A stable identifier for UI tests, and a clean VoiceOver
+            // announcement: the synonym count is useful on screen but would
+            // be noise read aloud before the switch state.
+            .accessibilityIdentifier(allergen.name)
+            .accessibilityLabel(allergen.name)
+            .accessibilityHint("\(allergen.synonyms.count) hidden names are recognised for this allergen")
 
             if let severity {
                 Picker("Severity", selection: Binding(
