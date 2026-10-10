@@ -15,6 +15,9 @@ struct HomeView: View {
 
     let profile: UserProfile
 
+    /// Lets the main call to action send the user to the Scan tab.
+    @Binding var selectedTab: AppTab
+
     @Environment(\.modelContext) private var context
 
     /// History, newest first. SwiftData keeps this in sync automatically, so
@@ -29,13 +32,21 @@ struct HomeView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Theme.Spacing.md) {
+                GreetingHeader(profile: profile, onAddName: { selectedTab = .profile })
+
+                scanCallToAction
+
+                if !records.isEmpty {
+                    StatsRow(records: records)
+                }
+
                 profileSummary
 
                 if records.isEmpty {
                     EmptyState(
                         symbolName: "text.viewfinder",
                         title: "No scans yet",
-                        message: "Open the Scan tab and photograph an ingredient label to get started.")
+                        message: "Tap Scan a new label above and photograph an ingredient list to get started.")
                 } else {
                     SectionHeading(text: "Recent scans", symbolName: "clock.arrow.circlepath")
 
@@ -68,6 +79,9 @@ struct HomeView: View {
         }
         .nirogiBackground()
         .navigationTitle("Nirogi")
+        // Inline, so the greeting is the visual hero of the screen rather
+        // than competing with a large navigation title.
+        .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchText, prompt: "Search saved scans")
         // Deletion is irreversible, so it is always confirmed explicitly.
         .confirmationDialog("Delete this scan?",
@@ -81,21 +95,64 @@ struct HomeView: View {
         }
     }
 
+    // MARK: - Call to action
+
+    /// The screen's primary action.
+    ///
+    /// Scanning is what the app is *for*, so the home screen leads with it
+    /// rather than making the user find the Scan tab first.
+    private var scanCallToAction: some View {
+        Button {
+            selectedTab = .scan
+        } label: {
+            HStack(spacing: Theme.Spacing.md) {
+                Image(systemName: "text.viewfinder")
+                    .font(.system(size: 30, weight: .semibold))
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Scan a new label")
+                        .font(.system(.title3, design: .rounded, weight: .bold))
+                    Text("Check a product in seconds")
+                        .font(Theme.Typography.caption)
+                        .opacity(0.85)
+                }
+
+                Spacer(minLength: 0)
+
+                Image(systemName: "chevron.right")
+                    .font(.subheadline.weight(.bold))
+                    .opacity(0.7)
+            }
+            .padding(.vertical, Theme.Spacing.xs)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .buttonStyle(.glassProminent)
+        .tint(Theme.Palette.jade)
+        .accessibilityHint("Opens the scanner")
+    }
+
     // MARK: - Profile summary
 
     private var profileSummary: some View {
-        GlassCard(title: greeting, symbolName: "person.text.rectangle") {
+        GlassCard(title: profile.isEmpty ? "Set up your profile" : "Checked against",
+                  symbolName: profile.isEmpty ? "exclamationmark.circle.fill" : "person.text.rectangle",
+                  tint: profile.isEmpty ? Theme.Palette.turmeric : nil) {
             VStack(alignment: .leading, spacing: Theme.Spacing.sm) {
                 if profile.isEmpty {
-                    Text("You have not set up any allergens yet, so every label will come back Safe. Add them in the Profile tab.")
+                    Text("You have not added any allergens yet, so every label will come back Safe.")
                         .font(Theme.Typography.body)
                         .foregroundStyle(Theme.Palette.inkMuted)
                         .fixedSize(horizontal: false, vertical: true)
-                } else {
-                    Text("Labels are checked against:")
-                        .font(Theme.Typography.caption)
-                        .foregroundStyle(Theme.Palette.inkMuted)
 
+                    Button {
+                        selectedTab = .profile
+                    } label: {
+                        Label("Add allergens", systemImage: "plus.circle.fill")
+                            .font(.subheadline.weight(.semibold))
+                    }
+                    .buttonStyle(.glass)
+                    .tint(Theme.Palette.turmeric)
+                } else {
                     // Wraps naturally at larger Dynamic Type sizes rather
                     // than truncating.
                     FlowLayout(spacing: Theme.Spacing.xs) {
@@ -112,12 +169,6 @@ struct HomeView: View {
                 }
             }
         }
-    }
-
-    /// Returns a `LocalizedStringKey` so both branches are translated.
-    private var greeting: LocalizedStringKey {
-        let name = profile.displayName.trimmingCharacters(in: .whitespaces)
-        return name.isEmpty ? "Your profile" : "Hello, \(name)"
     }
 
     // MARK: - Data
@@ -141,6 +192,181 @@ struct HomeView: View {
             try? context.save()
         }
         pendingDeletion = nil
+    }
+}
+
+// MARK: - Greeting header
+
+/// Time-aware welcome at the top of the home screen.
+///
+/// The greeting changes through the day and the user's name is the largest
+/// text on screen, which makes the app feel like it belongs to them rather
+/// than being a generic utility.
+struct GreetingHeader: View {
+
+    let profile: UserProfile
+    /// Called when a user without a saved name taps to add one.
+    let onAddName: () -> Void
+
+    /// Captured once per appearance rather than read repeatedly, so the
+    /// greeting cannot change mid-render.
+    @State private var now = Date()
+
+    private var name: String {
+        profile.displayName.trimmingCharacters(in: .whitespaces)
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+            HStack(spacing: Theme.Spacing.xs) {
+                Image(systemName: timeOfDay.symbolName)
+                    .font(.subheadline)
+                    .foregroundStyle(timeOfDay.tint)
+                    .symbolRenderingMode(.hierarchical)
+
+                Text(timeOfDay.greeting)
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(Theme.Palette.inkMuted)
+            }
+
+            if name.isEmpty {
+                Button(action: onAddName) {
+                    HStack(spacing: Theme.Spacing.xxs) {
+                        Text("Add your name")
+                            .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                        Image(systemName: "chevron.right.circle.fill")
+                            .font(.title3)
+                            .foregroundStyle(Theme.Palette.jade)
+                    }
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(Theme.Palette.ink)
+                .accessibilityHint("Opens your profile so you can add your name")
+            } else {
+                Text(name)
+                    .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                    .foregroundStyle(Theme.Palette.ink)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.7)
+            }
+
+            Text(now, format: .dateTime.weekday(.wide).day().month(.wide))
+                .font(Theme.Typography.caption)
+                .foregroundStyle(Theme.Palette.inkMuted)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, Theme.Spacing.xxs)
+        .padding(.top, Theme.Spacing.xs)
+        .onAppear { now = Date() }
+        .accessibilityElement(children: .contain)
+    }
+
+    private var timeOfDay: TimeOfDay {
+        TimeOfDay(hour: Calendar.current.component(.hour, from: now))
+    }
+}
+
+/// The four parts of the day the greeting recognises.
+enum TimeOfDay {
+    case morning, afternoon, evening, night
+
+    init(hour: Int) {
+        switch hour {
+        case 5..<12: self = .morning
+        case 12..<17: self = .afternoon
+        case 17..<21: self = .evening
+        default: self = .night
+        }
+    }
+
+    var greeting: LocalizedStringKey {
+        switch self {
+        case .morning: return "Good morning"
+        case .afternoon: return "Good afternoon"
+        case .evening: return "Good evening"
+        case .night: return "Good night"
+        }
+    }
+
+    var symbolName: String {
+        switch self {
+        case .morning: return "sunrise.fill"
+        case .afternoon: return "sun.max.fill"
+        case .evening: return "sunset.fill"
+        case .night: return "moon.stars.fill"
+        }
+    }
+
+    var tint: Color {
+        switch self {
+        case .morning, .afternoon, .evening: return Theme.Palette.turmeric
+        case .night: return Theme.Palette.jade
+        }
+    }
+}
+
+// MARK: - Stats
+
+/// A short summary of what the user has scanned so far.
+struct StatsRow: View {
+
+    let records: [ScanRecord]
+
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    private var safeCount: Int { records.count { $0.verdict == .safe } }
+    private var avoidCount: Int { records.count { $0.verdict == .avoid } }
+
+    var body: some View {
+        let tiles = [
+            StatTile(value: records.count, label: "Scanned",
+                     symbolName: "doc.text.viewfinder", tint: Theme.Palette.jade),
+            StatTile(value: safeCount, label: "Safe",
+                     symbolName: "checkmark.seal.fill", tint: Color("VerdictSafe")),
+            StatTile(value: avoidCount, label: "Avoided",
+                     symbolName: "xmark.octagon.fill", tint: Color("VerdictAvoid"))
+        ]
+
+        // Three tiles side by side are too cramped at accessibility sizes,
+        // so they stack instead.
+        return Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(spacing: Theme.Spacing.xs) { ForEach(tiles) { $0 } }
+            } else {
+                HStack(spacing: Theme.Spacing.xs) { ForEach(tiles) { $0 } }
+            }
+        }
+    }
+}
+
+/// One figure in the stats row.
+struct StatTile: View, Identifiable {
+
+    let value: Int
+    let label: LocalizedStringKey
+    let symbolName: String
+    let tint: Color
+
+    var id: String { symbolName }
+
+    var body: some View {
+        VStack(spacing: Theme.Spacing.xxs) {
+            Image(systemName: symbolName)
+                .font(.subheadline)
+                .foregroundStyle(tint)
+
+            Text("\(value)")
+                .font(.system(.title2, design: .rounded, weight: .bold))
+                .foregroundStyle(Theme.Palette.ink)
+                .contentTransition(.numericText())
+
+            Text(label)
+                .font(.caption2)
+                .foregroundStyle(Theme.Palette.inkMuted)
+        }
+        .frame(maxWidth: .infinity)
+        .nirogiCard(cornerRadius: Theme.Radius.md, padding: Theme.Spacing.sm)
+        .accessibilityElement(children: .combine)
     }
 }
 
