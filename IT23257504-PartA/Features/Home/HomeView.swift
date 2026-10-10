@@ -150,33 +150,52 @@ struct HomeView: View {
 struct HistoryRow: View {
     let record: ScanRecord
 
+    /// At accessibility text sizes the row stacks vertically instead of
+    /// squeezing the title and the badge onto one line, where the title
+    /// would break mid-word.
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     var body: some View {
-        HStack(spacing: Theme.Spacing.sm) {
-            thumbnail
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(record.productName)
-                    .font(.body.weight(.semibold))
-                    .foregroundStyle(Theme.Palette.ink)
-                    .lineLimit(2)
-
-                Text(record.summary)
-                    .font(Theme.Typography.caption)
-                    .foregroundStyle(Theme.Palette.inkMuted)
-                    .lineLimit(1)
-
-                Text(record.createdAt, format: .relative(presentation: .named))
-                    .font(.caption2)
-                    .foregroundStyle(Theme.Palette.inkMuted)
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
+                    HStack(spacing: Theme.Spacing.sm) {
+                        thumbnail
+                        VerdictBadge(verdict: record.verdict)
+                        Spacer(minLength: 0)
+                    }
+                    details
+                }
+            } else {
+                HStack(spacing: Theme.Spacing.sm) {
+                    thumbnail
+                    details
+                    Spacer(minLength: 0)
+                    VerdictBadge(verdict: record.verdict)
+                }
             }
-
-            Spacer(minLength: 0)
-
-            VerdictBadge(verdict: record.verdict)
         }
         .nirogiCard(cornerRadius: Theme.Radius.md, padding: Theme.Spacing.sm)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(record.productName). \(record.verdict.title). \(record.summary)")
+    }
+
+    private var details: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(record.productName)
+                .font(.body.weight(.semibold))
+                .foregroundStyle(Theme.Palette.ink)
+                .lineLimit(2)
+
+            Text(record.summary)
+                .font(Theme.Typography.caption)
+                .foregroundStyle(Theme.Palette.inkMuted)
+                .lineLimit(1)
+
+            Text(record.createdAt, format: .relative(presentation: .named))
+                .font(.caption2)
+                .foregroundStyle(Theme.Palette.inkMuted)
+        }
     }
 
     @ViewBuilder

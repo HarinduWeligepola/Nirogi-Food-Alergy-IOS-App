@@ -18,7 +18,7 @@ import Foundation
 /// Loading happens once at launch; lookups afterwards are dictionary hits
 /// rather than repeated array scans, which keeps analysis fast even as the
 /// synonym list grows past three hundred entries.
-struct AllergenKnowledgeBase: Sendable {
+nonisolated struct AllergenKnowledgeBase: Sendable {
 
     /// Every allergen, in the order defined by the JSON file.
     let allergens: [Allergen]

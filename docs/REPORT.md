@@ -236,7 +236,47 @@ instead, which treats an adjacent swap as one edit. It is deliberately limited
 to words of five characters or more, because one character of slack on `egg` or
 `soy` would match far too much.
 
-### 3.5 Localization that silently did nothing
+### 3.5 The background work that was not in the background
+
+A compiler warning late in the project revealed that a claim I had already
+written into the documentation was false.
+
+The project is configured with `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor`,
+which is the modern Xcode default. That setting makes *every* type in the
+module implicitly main-actor isolated — including `LabelParser` and
+`SafetyEngine`, the types I had carefully designed to be pure and
+framework-free.
+
+So this code:
+
+```swift
+let analysis = await Task.detached(priority: .userInitiated) {
+    let parsed = LabelParser.parse(output.text)
+    return engine.analyse(label: parsed, profile: profile)
+}.value
+```
+
+was not running the work off the main actor at all. The detached task
+immediately hopped *back* to the main actor to call two main-isolated methods.
+The interface was never actually freed up, and the app only felt responsive
+because the work is fast.
+
+The fix was to mark the pure types `nonisolated`, which is what I had assumed
+they were all along:
+
+```swift
+nonisolated enum LabelParser { … }
+nonisolated struct SafetyEngine: Sendable { … }
+```
+
+> **What I learned.** Architecture is not what you intend, it is what the
+> compiler actually enforces. I had written "runs off the main actor" in a
+> source comment *and* in the technical documentation before checking whether
+> it was true. The warning was easy to overlook among build output, and had I
+> not read the warnings the documentation would have shipped with a confident,
+> incorrect claim.
+
+### 3.6 Localization that silently did nothing
 
 After adding Sinhala and Tamil, parts of the interface stayed stubbornly
 English — with no warning or error. The cause is a genuine SwiftUI subtlety:
@@ -285,6 +325,8 @@ is now covered by a regression test.
 | Trace warning lost under a heading | Scanning a real sample | `testTraceWarningSurvivesAllergenAdviceHeading` |
 | Transposition not matched | Logic harness | `testTransposedLettersAreCaught` |
 | Profile toggle not findable | UI test | `testProfileChangesArePersisted` |
+| Verdict badge broke mid-word at accessibility text sizes | Manual UAT | Visual check, §4.4 |
+| Background work silently running on the main actor | Compiler warning | Warning-free build |
 
 Two bugs were found by **running the app**, not by testing it. Both involved
 real Vision output differing from what I had imagined OCR would produce. This is
@@ -308,13 +350,44 @@ iOS 26.1, against the acceptance criteria implied by the brief.
 | 9 | Save a scan, force-quit, relaunch | History intact | ✅ Pass |
 | 10 | Edit profile, reopen a saved scan | Re-judged, change announced | ✅ Pass |
 | 11 | Switch to Dark Mode | All screens legible | ✅ Pass |
-| 12 | Increase Dynamic Type | Text scales, chips reflow, nothing clipped | ✅ Pass |
-| 13 | Rotate to landscape | Layout adapts | ✅ Pass |
+| 12 | Increase Dynamic Type to an accessibility size | Text scales, chips reflow, nothing clipped | ⚠️ Failed first, then passed — see below |
+| 13 | Run on iPad Pro 11-inch | Layout adapts to the larger screen | ✅ Pass |
 | 14 | Switch language to Sinhala | Interface in Sinhala | ✅ Pass |
 | 15 | Switch language to Tamil | Interface in Tamil | ✅ Pass |
 | 16 | Scan an unreadable image | Clear error, option to retry | ✅ Pass |
 
-### 4.4 Known-good evidence
+#### Scenario 12 — the one that failed
+
+Raising Dynamic Type to an accessibility size exposed a real layout defect that
+no automated test would have caught. The verdict badge in a history row broke
+mid-word and overflowed its capsule:
+
+> **Avo**
+> **id**
+
+Two fixes were applied. The badge's text now has `lineLimit(1)`, `fixedSize()`
+and a deliberate `dynamicTypeSize` ceiling — body text must scale all the way up
+for readability, but a fixed-width ornament that grows without limit becomes
+*less* legible, not more. Separately, `HistoryRow` now switches to a vertical
+layout when `dynamicTypeSize.isAccessibilitySize` is true, instead of squeezing
+a long product name and a badge onto one line.
+
+This is worth recording because it is the kind of defect that only appears when
+someone actually turns the setting on and looks at the screen. The unit tests
+could not see it, and the UI tests passed throughout.
+
+### 4.5 Device and appearance coverage
+
+| Configuration | Verified |
+|---|---|
+| iPhone 17 Pro, iOS 26.1 | ✅ Primary development target |
+| iPad Pro 11-inch (M5), iOS 26.1 | ✅ Layout adapts; tab bar moves to the top |
+| Light appearance | ✅ |
+| Dark appearance | ✅ |
+| Accessibility text sizes | ✅ After the fix above |
+| English / Sinhala / Tamil | ✅ Each launched and read on screen |
+
+### 4.6 Known-good evidence
 
 Verified behaviour on the bundled samples, with a profile of severe dairy and
 moderate peanut:
@@ -457,3 +530,5 @@ the part I learned the most from.
 | A Safe verdict | Scan history | Allergen profile |
 | ![Dark](screenshots/10-profile-dark.png) | ![Sinhala](screenshots/11-home-sinhala.png) | ![Tamil](screenshots/12-home-tamil.png) |
 | Dark Mode | Sinhala interface | Tamil interface |
+| ![Dynamic Type](screenshots/13-dynamic-type.png) | ![iPad](screenshots/14-ipad.png) | |
+| Accessibility text size | iPad layout | |

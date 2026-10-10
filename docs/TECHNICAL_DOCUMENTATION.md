@@ -79,7 +79,11 @@ This single constraint produced three benefits:
 1. **Testability.** The core logic is verified by 67 unit tests that need no
    simulator, no camera and no database.
 2. **Concurrency safety.** Because it touches no shared mutable state, parsing
-   and matching run on a background task without any locking.
+   and matching run on a background task without any locking. Note that the
+   pure types are explicitly marked `nonisolated`: the project sets
+   `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor`, so without that annotation they
+   would be main-actor isolated and the detached task would hop straight back
+   to the main actor.
 3. **Reusability.** The same engine judges a fresh scan and re-judges a saved
    one, with no duplicated logic.
 

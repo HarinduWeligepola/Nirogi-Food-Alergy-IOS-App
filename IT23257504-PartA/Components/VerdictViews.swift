@@ -46,12 +46,21 @@ struct VerdictBadge: View {
             if !compact {
                 Text(verdict.title)
                     .font(.caption.weight(.semibold))
+                    // The badge is a fixed-width ornament beside other
+                    // content, so its label must never wrap mid-word.
+                    .lineLimit(1)
             }
         }
         .foregroundStyle(.white)
         .padding(.horizontal, compact ? Theme.Spacing.xs : Theme.Spacing.sm)
         .padding(.vertical, Theme.Spacing.xxs)
         .background(verdict.fillColor, in: .capsule)
+        .fixedSize()
+        // Capped deliberately. Body text must scale all the way up for
+        // readability, but a badge that grows without limit breaks out of
+        // its capsule and becomes less legible, not more. VoiceOver still
+        // announces the verdict in full.
+        .dynamicTypeSize(...DynamicTypeSize.accessibility1)
         // Announced as one phrase rather than icon-then-text.
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(verdict.title)
