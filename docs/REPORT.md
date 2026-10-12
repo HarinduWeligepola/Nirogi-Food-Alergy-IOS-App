@@ -477,9 +477,9 @@ silently needs to be verified by observation, not by inspection of the code.
 
 ### On using AI assistance
 
-AI assistance (Claude) was used throughout, and is logged in full in
-[AI_USAGE_LOG.md](AI_USAGE_LOG.md). The honest assessment is that it was most
-useful for breadth and speed — scaffolding, boilerplate, the synonym lists — and
+AI assistance was used throughout, and is documented in full in the
+accompanying AI usage log, submitted separately. The honest assessment is that
+it was most useful for breadth and speed — scaffolding, boilerplate, the synonym lists — and
 that the parts of the project I value most came from the iteration *after* the
 first draft: running real labels through the pipeline, reading the output,
 noticing that 620 g of sugar is impossible, and reasoning about why.

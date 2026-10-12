@@ -165,7 +165,7 @@ English, **Sinhala (සිංහල)** and **Tamil (தமிழ்)**, via a St
 | [User Guide](docs/USER_GUIDE.md) | How to use the app, screen by screen |
 | [Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md) | Architecture, the matching algorithm, data model |
 | [Report](docs/REPORT.md) | Design decisions, challenges, testing, reflections |
-| [AI Usage Log](docs/AI_USAGE_LOG.md) | How AI assistance was used, as required by the brief |
+| AI Usage Log | How AI assistance was used, as required by the brief; submitted separately |
 
 ---
 
