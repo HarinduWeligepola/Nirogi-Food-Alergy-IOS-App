@@ -111,7 +111,7 @@ IT23257504-PartA/
 ├── Components/       GlassCard, verdict views, custom layout
 ├── Features/         One folder per screen (MVVM)
 │   ├── Onboarding/   Disclaimer and first-run setup
-│   ├── Home/         Scan history
+│   ├── Home/         Greeting, scan shortcut, stats and history
 │   ├── Scan/         Image capture and OCR
 │   ├── Result/       Verdict and evidence
 │   ├── Profile/      Allergen rules
