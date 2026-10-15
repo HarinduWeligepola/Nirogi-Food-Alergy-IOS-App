@@ -146,6 +146,33 @@ iOS 26's **Liquid Glass** was adopted fully rather than imitated. The background
 gradient exists specifically so the glass has something to refract; on a flat
 background it looks grey and dead.
 
+### 2.7 A home screen that leads with the action
+
+The first version of the Home tab was a bare history list. It answered "what
+have I scanned?", but a new user opening the app in a shop has a different
+question: "how do I check this packet?". The home screen was redesigned late in
+the project around that question.
+
+- **A time-aware greeting** (morning, afternoon, evening, night) with the
+  user's name as the largest text on screen, so the app feels like theirs. If
+  no name is set, the header offers to add one.
+- **A prominent "Scan a new label" action** in prominent glass. Scanning is
+  what the app is *for*, so it should not depend on the user finding the Scan
+  tab.
+- **A stats row** (Scanned, Safe, Avoided), shown only once there is history to
+  summarise, so an empty app is not greeted with three zeros.
+- **An actionable empty profile.** With no allergens set, every label comes back
+  Safe, which is a dangerous kind of silence. The profile card turns turmeric
+  and offers an *Add allergens* button instead of a sentence telling the user to
+  find the Profile tab.
+
+Two of these actions move the user to another tab. To make that possible the
+tabs are modelled as an `AppTab` enum bound to the `TabView` selection, rather
+than relying on implicit tab order, so any screen can route to another. The
+stats row follows the same accessibility rule as the history rows: at
+accessibility text sizes its three tiles stack vertically instead of squeezing
+side by side.
+
 ---
 
 ## 3. Development challenges
@@ -301,9 +328,9 @@ consequences are highest.
 
 | Layer | Tests | What it proves |
 |---|---|---|
-| Unit — engine | 30 | The matching rules are correct |
-| Unit — parser | 22 | Messy OCR becomes correct structured data |
-| Unit — models | 15 | Persistence and knowledge-base integrity |
+| Unit — engine | 27 | The matching rules are correct |
+| Unit — parser | 21 | Messy OCR becomes correct structured data |
+| Unit — models | 19 | Persistence and knowledge-base integrity |
 | UI — end to end | 9 | The real app works with real Vision OCR |
 | **Total** | **76** | **All passing** |
 
@@ -325,7 +352,7 @@ is now covered by a regression test.
 | Trace warning lost under a heading | Scanning a real sample | `testTraceWarningSurvivesAllergenAdviceHeading` |
 | Transposition not matched | Logic harness | `testTransposedLettersAreCaught` |
 | Profile toggle not findable | UI test | `testProfileChangesArePersisted` |
-| Verdict badge broke mid-word at accessibility text sizes | Manual UAT | Visual check, §4.4 |
+| Verdict badge broke mid-word at accessibility text sizes | Manual UAT | Visual check, §4.3 scenario 12 |
 | Background work silently running on the main actor | Compiler warning | Warning-free build |
 
 Two bugs were found by **running the app**, not by testing it. Both involved
@@ -376,7 +403,7 @@ This is worth recording because it is the kind of defect that only appears when
 someone actually turns the setting on and looks at the screen. The unit tests
 could not see it, and the UI tests passed throughout.
 
-### 4.5 Device and appearance coverage
+### 4.4 Device and appearance coverage
 
 | Configuration | Verified |
 |---|---|
@@ -387,7 +414,7 @@ could not see it, and the UI tests passed throughout.
 | Accessibility text sizes | ✅ After the fix above |
 | English / Sinhala / Tamil | ✅ Each launched and read on screen |
 
-### 4.6 Known-good evidence
+### 4.5 Known-good evidence
 
 Verified behaviour on the bundled samples, with a profile of severe dairy and
 moderate peanut:
@@ -427,9 +454,9 @@ application launch, so regressions would be visible.
 | Requirement | How it is met |
 |---|---|
 | **Purpose and audience** | §1 — a real problem with a locally specific dimension |
-| **Advanced UI elements** | Liquid Glass, custom animations, spring entrance, gesture-driven navigation, adaptive layouts |
-| **SwiftUI components and customisation** | `GlassCard` component, `.nirogiCard()` modifier, custom `FlowLayout` |
-| **Navigation and architecture** | `TabView` + `NavigationStack`, MVVM, six screens |
+| **Advanced UI elements** | Liquid Glass panels and prominent glass buttons; spring entrance on the verdict (disabled under Reduce Motion); animated phase changes on Scan and onboarding; a map detail card that slides up from the bottom; long-press context menus with confirmed deletion; searchable history and allergen lists; layouts that switch from horizontal to vertical at accessibility text sizes; iPhone and iPad support |
+| **SwiftUI components and customisation** | `GlassCard` component, `.nirogiCard()` modifier, custom `FlowLayout` built on the `Layout` protocol, `GreetingHeader` and `StatsRow` components |
+| **Navigation and architecture** | `TabView` with an `AppTab` selection enum and a `NavigationStack` per tab; MVVM; six screens (Onboarding, Home, Scan, Result, Places, Profile) |
 | **Data persistence** | SwiftData for profile and history, with external image storage |
 | **Emerging technology** | **Vision** (OCR + barcode) as the app's core, plus MapKit and Localization |
 | **Visual design and branding** | Custom icon with light/dark/tinted variants, jade-and-turmeric palette, consistent tokens |

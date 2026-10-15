@@ -182,8 +182,16 @@ you are managing sugar or salt.
 
 <img src="screenshots/08-home-history.png" width="220" align="right" alt="Home screen with history">
 
-The **Home** tab shows what your labels are being checked against, then every
-scan you have saved, newest first.
+The **Home** tab greets you by name and puts the main action first: tap
+**Scan a new label** to jump straight to the scanner. Once you have saved some
+scans, a row of totals shows how many you have **Scanned**, how many were
+**Safe** and how many you **Avoided**.
+
+Below that, Home shows what your labels are being checked against, then every
+scan you have saved, newest first. If you have not added any allergens yet, that
+card turns amber with an **Add allergens** button, because with an empty profile
+every label comes back Safe. If you have not set your name, tap **Add your
+name** at the top.
 
 Each row shows the photo, the product name, which allergens were found, when you
 scanned it, and the verdict.

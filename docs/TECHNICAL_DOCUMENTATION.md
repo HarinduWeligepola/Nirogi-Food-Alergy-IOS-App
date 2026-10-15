@@ -346,8 +346,13 @@ at 0.6 before saving.
 ### Navigation
 
 `TabView` with four tabs, each owning its own `NavigationStack`: Home, Scan,
-Places, Profile. The app has six distinct screens in total, exceeding the
-three-screen requirement.
+Places, Profile. The app has six distinct screens in total (Onboarding, Home,
+Scan, Result, Places, Profile), exceeding the three-screen requirement.
+
+The tabs are modelled as an `AppTab` enum bound to the `TabView` selection
+rather than relying on implicit order. `HomeView` receives that selection as a
+`@Binding`, which lets its *Scan a new label* action open the Scan tab and its
+*Add allergens* and *Add your name* prompts open Profile.
 
 ### Liquid Glass
 
@@ -458,9 +463,9 @@ and app launch.
 
 | Suite | Count | Covers |
 |---|---|---|
-| `SafetyEngineTests` | 30 | Per-user verdicts, hidden names, local ingredients, false positives, word boundaries, severity scaling, OCR tolerance, deduplication, diets, nutrient limits |
-| `LabelParserTests` | 22 | Ingredient splitting, trace warnings, both nutrition layouts, unit conversion, OCR noise, edge cases |
-| `ModelTests` | 15 | Profile mutation, snapshots, persistence round-trips, knowledge-base integrity |
+| `SafetyEngineTests` | 27 | Per-user verdicts, hidden names, local ingredients, false positives, word boundaries, severity scaling, OCR tolerance, deduplication, diets, nutrient limits |
+| `LabelParserTests` | 21 | Ingredient splitting, trace warnings, both nutrition layouts, unit conversion, OCR noise, edge cases |
+| `ModelTests` | 19 | Profile mutation, snapshots, persistence round-trips, knowledge-base integrity |
 | `NirogiUITests` | 9 | End-to-end journeys through the real app with real Vision OCR |
 
 The UI tests mock nothing. A bundled image goes through Vision, the parser and
